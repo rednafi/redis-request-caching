@@ -1,7 +1,6 @@
 import json
 import sys
 from datetime import timedelta
-from pprint import pprint
 
 import httpx
 import redis
