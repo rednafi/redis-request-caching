@@ -95,6 +95,6 @@ def view(coordinates: str) -> dict:
     incorporate Redis Caching. You'll only expose this API to
     the end user. """
 
-    # coordinates = "90.3866,23.7182;90.3742,23.7461;90.3831,23.7494;90.3586,23.766"
+    # coordinates = "90.3866,23.7182;90.3742,23.7461"
 
     return route_optima(coordinates)
