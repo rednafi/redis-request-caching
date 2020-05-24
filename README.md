@@ -37,6 +37,8 @@ The app uses the following stack:
     access_token = "Your-Mapbox-API-token"
     ```
 
+* In the `.env` file, replace the host ip with your own local ip
+
 * Go to the root directory and run:
 
     ```bash
