@@ -51,7 +51,7 @@ def get_routes_from_cache(key: str) -> str:
 def set_routes_to_cache(key: str, value: str) -> bool:
     """Data to redis."""
 
-    state = client.setex(key, timedelta(seconds=60), value=value,)
+    state = client.setex(key, timedelta(seconds=3600), value=value,)
     return state
 
 
@@ -74,8 +74,11 @@ def route_optima(coordinates: str) -> dict:
         if data["code"] == "Ok":
             data["cache"] = False
             data = json.dumps(data)
-            _ = set_routes_to_cache(key=coordinates, value=data)
-        return json.loads(data)
+            state = set_routes_to_cache(key=coordinates, value=data)
+
+            if state is True:
+                return json.loads(data)
+        return data
 
 
 app = FastAPI()
