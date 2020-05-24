@@ -117,7 +117,7 @@ The app uses the following stack:
     }
     ```
 
-* If you hit the above url for the first time, the `cache` attribute of the json response should show `false`. However, hitting the same url with the same coordinates again will show the cached response and this time the `cache` attribute should show `true`.
+* If you've hit the above url for the first time, the `cache` attribute of the json response should show `false`. This means that the response is being served from the original MapBox API. However, hitting the same url with the same coordinates again will show the cached response and this time the `cache` attribute should show `true`.
 
 * You can also go to `localhost:5000/docs` and play around with the swagger UI.
 
@@ -128,7 +128,7 @@ The app uses the following stack:
 
     ![alt](./ext/redisinsight.png)
 
-# Remarks
+## Remarks
 
 All the pieces of codes in the blog were written and tested with python 3.8 on a machine running Ubuntu 18.04.
 
