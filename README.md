@@ -12,10 +12,11 @@ This app sends request to [Mapbox](https://www.mapbox.com/)'s [route optimizatio
 
 The app uses the following stack:
 
-* Redis for caching
-* RedisInsight for monitoring the caches
-* FastAPI for wrapping the original API and exposing a new one
-* Docker and docker-compose for deployment
+* [Httpx](https://github.com/encode/httpx/) for sending the requests
+* [Redis](https://redis.io/) for caching
+* [RedisInsight](https://redislabs.com/redisinsight/) for monitoring the caches
+* [FastAPI](https://github.com/tiangolo/fastapi) for wrapping the original API and exposing a new one
+* [Docker](https://www.docker.com/) and [docker-compose](https://docs.docker.com/compose/) for deployment
 
 ## Requirements
 
@@ -24,7 +25,11 @@ The app uses the following stack:
 
 ## Run the App
 
-* Clone the repository
+* Clone the repository.
+
+    ```
+    git clone git@github.com:rednafi/redis-request-caching.git
+    ```
 * Go to the root directory and run:
 
     ```bash
