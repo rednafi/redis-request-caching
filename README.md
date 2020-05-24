@@ -112,7 +112,12 @@ The app uses the following stack:
 
 * You can also go to `localhost:5000/docs` and play around with the swagger UI.
 
+    ![alt](./ext/swagger.png)
+
+
 * The cached data can be monitored using redisinsight. Go to `localhost:8000`.
+
+    ![alt](./ext/redisinsight.png)
 
 ## Disclaimer
 

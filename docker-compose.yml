@@ -17,8 +17,8 @@ services:
       - ./redis-data:/data
 
     command:
-      # Save if 100 keys are added in every 10 seconds
-      - "--save 10 100"
+      # Save if 1 keys are added in every 900 seconds
+      - "--save 900 1"
 
       # Set password
       - "--requirepass ubuntu"
