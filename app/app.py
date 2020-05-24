@@ -1,16 +1,24 @@
 import json
+import os
 import sys
 from datetime import timedelta
 
 import httpx
 import redis
+from dotenv import load_dotenv
 from fastapi import FastAPI
+
+load_dotenv()
 
 
 def redis_connect() -> redis.client.Redis:
     try:
         client = redis.Redis(
-            host="localhost", port=6379, password="ubuntu", db=0, socket_timeout=5,
+            host=os.environ.get("HOST"),
+            port=6379,
+            password="ubuntu",
+            db=0,
+            socket_timeout=5,
         )
         ping = client.ping()
         if ping is True:

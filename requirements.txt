@@ -19,6 +19,7 @@ idna==2.9
 nodeenv==1.3.5
 pre-commit==2.4.0
 pydantic==1.5.1
+python-dotenv==0.13.0
 PyYAML==5.3.1
 redis==3.5.2
 rfc3986==1.4.0
