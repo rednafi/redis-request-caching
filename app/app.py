@@ -5,6 +5,7 @@ from pprint import pprint
 
 import httpx
 import redis
+from fastapi import FastAPI
 
 
 def redis_connect() -> redis.client.Redis:
@@ -74,11 +75,19 @@ def route_optima(coordinates: str) -> dict:
         if data["code"] == "Ok":
             data["cache"] = False
             data = json.dumps(data)
-            state = set_routes_to_cache(key=coordinates, value=data)
-            if state is True:
-                return json.loads(data)
+            _ = set_routes_to_cache(key=coordinates, value=data)
+        return json.loads(data)
 
 
-if __name__ == "__main__":
-    coordinates = "90.3866,23.7182;90.3742,23.7461;90.3831,23.7494;90.3586,23.766"
-    pprint(route_optima(coordinates))
+app = FastAPI()
+
+
+@app.get("/route-optima/{coordinates}")
+def view(coordinates):
+    """This will wrap our original route optimization API and
+    incorporate Redis Caching. You'll only expose this API to
+    the end user. """
+
+    # coordinates = "90.3866,23.7182;90.3742,23.7461;90.3831,23.7494;90.3586,23.766"
+
+    return route_optima(coordinates)
