@@ -6,6 +6,12 @@
 
 </div>
 
+<div align="center">
+
+Blog: https://rednafi.github.io/digressions/python/2020/05/25/python-redis-cache.html
+
+</div>
+
 ## Description
 
 This app sends request to [Mapbox](https://www.mapbox.com/)'s [route optimization API](https://docs.mapbox.com/api/navigation/#optimization) and caches the return value in a Redis database for 1 hours. Meanwhile, if new a new request arrives, the app first checks if the return value exists in the Redis cache. If the value exists, it shows the cached value, otherwise, it sends a new request to the Mapbox API, cache that value and then shows the result.
