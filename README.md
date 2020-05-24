@@ -128,6 +128,10 @@ The app uses the following stack:
 
     ![alt](./ext/redisinsight.png)
 
+# Remarks
+
+All the pieces of codes in the blog were written and tested with python 3.8 on a machine running Ubuntu 18.04.
+
 ## Disclaimer
 
 This app has been made for demonstration purpose only. So it might not reflect the best practices of production ready applications. Using APIs without authentication like this is not recommended.
