@@ -8,7 +8,7 @@
 
 <div align="center">
 
-**|| [Blog](https://rednafi.github.io/digressions/python/database/2020/05/25/python-redis-cache.html) ||**
+[**|| Blog ||**](https://rednafi.github.io/digressions/python/database/2020/05/25/python-redis-cache.html)
 
 </div>
 
