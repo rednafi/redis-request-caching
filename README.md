@@ -131,12 +131,12 @@ The app uses the following stack:
 
 * If you've hit the above url for the first time, the `cache` attribute of the json response should show `false`. This means that the response is being served from the original MapBox API. However, hitting the same url with the same coordinates again will show the cached response and this time the `cache` attribute should show `true`.
 
-* You can also go to `localhost:5000/docs` and play around with the swagger UI.
+* You can also go to `http://localhost:5000/docs` and play around with the swagger UI.
 
     ![alt](./ext/swagger.png)
 
 
-* The cached data can be monitored using redisinsight. Go to `localhost:8000`.
+* The cached data can be monitored using redisinsight. Go to `http://localhost:8000`.
 
     ![alt](./ext/redisinsight.png)
 
