@@ -38,7 +38,7 @@ def get_routes_from_api(coordinates: str) -> dict:
         base_url = "https://api.mapbox.com/optimized-trips/v1/mapbox/driving"
 
         geometries = "geojson"
-        access_token = "Your-MapBox-API-token"
+        access_token = os.environ.get("MAPBOX_ACCESS_TOKEN")
 
         url = f"{base_url}/{coordinates}?geometries={geometries}&access_token={access_token}"
 

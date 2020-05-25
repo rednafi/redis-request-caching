@@ -37,10 +37,10 @@ The app uses the following stack:
     git clone git@github.com:rednafi/redis-request-caching.git
     ```
 
-* Go to `app/app.py` and in line 41, provide your MapBox token. You can get it from [here.](https://docs.mapbox.com/help/how-mapbox-works/access-tokens/)
+* Go to `.env` file and provide your `MAPBOX_ACCESS_TOKEN`. You can get it from [here.](https://docs.mapbox.com/help/how-mapbox-works/access-tokens/)
 
     ```
-    access_token = "Your-Mapbox-API-token"
+    MAPBOX_ACCESS_TOKEN="Your-Mapbox-API-token"
     ```
 
 * In the `.env` file, replace the host ip with your own local ip
