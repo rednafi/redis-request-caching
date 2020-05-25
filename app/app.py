@@ -15,8 +15,8 @@ def redis_connect() -> redis.client.Redis:
     try:
         client = redis.Redis(
             host=os.environ.get("HOST"),
-            port=6379,
-            password="ubuntu",
+            port=int(os.environ.get("REDIS_PORT")),
+            password=os.environ.get("REDIS_PASSWORD"),
             db=0,
             socket_timeout=5,
         )
