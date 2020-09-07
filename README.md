@@ -2,7 +2,7 @@
 
 # Redis || Request || Caching
 
-🐍 Simple Python App to Demonstrate API Request Caching with Redis
+🐍 Simple Python Application to Demonstrate API Request Caching with Redis
 
 </div>
 
