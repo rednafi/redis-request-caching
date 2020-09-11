@@ -1,0 +1,6 @@
+fastapi
+httpx
+redis
+uvicorn
+uvloop
+python-dotenv

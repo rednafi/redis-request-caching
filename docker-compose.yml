@@ -2,26 +2,28 @@ version: "3.2"
 services:
   redis:
     container_name: redis-cont
-    image: "redis:alpine"
-    command: redis-server --requirepass ubuntu
+    image: redis:alpine
 
     environment:
       - REDIS_PASSWORD=ubuntu
       - REDIS_REPLICATION_MODE=master
 
     ports:
-      - "6379:6379"
+      - 6379:6379
 
     volumes:
       # save redisearch data to your current working directory
       - ./redis-data:/data
-
+      
     command:
       # Save if 1 keys are added in every 900 seconds
-      - "--save 900 1"
+      - --save 900 1
 
       # Set password
-      - "--requirepass ubuntu"
+      - --requirepass ubuntu
+
+    networks:
+      - redis-net
 
   redisinsight: # redis db visualization dashboard
     container_name: redis-insight
@@ -30,6 +32,8 @@ services:
       - 8001:8001
     volumes:
       - redisinsight:/db
+    networks:
+      - redis-net
 
   web: # Traveling Salesman Optimization api
     container_name: "web-cont"
@@ -40,7 +44,11 @@ services:
       - 5000:5000
     depends_on:
       - redis
+    networks:
+      - redis-net
 
+networks:
+  redis-net:
 
 volumes:
   redis-data:
