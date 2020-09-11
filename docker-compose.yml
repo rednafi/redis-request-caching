@@ -1,4 +1,4 @@
-version: "3.2"
+version: "3.7"
 services:
   redis:
     container_name: redis-cont
@@ -14,7 +14,7 @@ services:
     volumes:
       # save redisearch data to your current working directory
       - ./redis-data:/data
-      
+
     command:
       # Save if 1 keys are added in every 900 seconds
       - --save 900 1
@@ -36,9 +36,9 @@ services:
       - redis-net
 
   web: # Traveling Salesman Optimization api
-    container_name: "web-cont"
+    container_name: web-cont
     build:
-      context: "./"
+      context: ./
       dockerfile: Dockerfile
     ports:
       - 5000:5000
