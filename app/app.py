@@ -1,23 +1,23 @@
 import json
-import os
 import sys
 from datetime import timedelta
 from typing import Optional
 
 import httpx
 import redis
-from dotenv import load_dotenv
 from fastapi import FastAPI
+from konfik import Konfik
 
-load_dotenv()
+konfik = Konfik(".env")
+config = konfik.config
 
 
 def redis_connect() -> Optional[redis.Redis]:
     try:
         client = redis.Redis(
-            host=os.environ.get("HOST"),
-            port=int(os.environ.get("REDIS_PORT")),
-            password=os.environ.get("REDIS_PASSWORD"),
+            host=config.HOST,
+            port=int(config.REDIS_PORT),
+            password=config.REDIS_PASSWORD,
             db=0,
             socket_timeout=5,
         )
@@ -39,7 +39,7 @@ def get_routes_from_api(coordinates: str) -> dict:
         base_url = "https://api.mapbox.com/optimized-trips/v1/mapbox/driving"
 
         geometries = "geojson"
-        access_token = os.environ.get("MAPBOX_ACCESS_TOKEN")
+        access_token = config.MAPBOX_ACCESS_TOKEN
 
         url = f"{base_url}/{coordinates}?geometries={geometries}&access_token={access_token}"
 
@@ -57,7 +57,11 @@ def get_routes_from_cache(key: str) -> str:
 def set_routes_to_cache(key: str, value: str) -> bool:
     """Data to redis."""
 
-    state = client.setex(key, timedelta(seconds=3600), value=value,)
+    state = client.setex(
+        key,
+        timedelta(seconds=3600),
+        value=value,
+    )
     return state
 
 
@@ -94,7 +98,7 @@ app = FastAPI()
 def view(coordinates: str) -> dict:
     """This will wrap our original route optimization API and
     incorporate Redis Caching. You'll only expose this API to
-    the end user. """
+    the end user."""
 
     # coordinates = "90.3866,23.7182;90.3742,23.7461"
 

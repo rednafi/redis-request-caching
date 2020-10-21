@@ -1,0 +1,8 @@
+[tool.black]
+line = 88
+target-version = ["py38"]
+exclude = "venv"
+
+[tool.isort]
+known_third_party = ["dotenv", "fastapi", "httpx", "redis"]
+profile = "black"

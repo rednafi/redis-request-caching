@@ -3,4 +3,4 @@ httpx
 redis
 uvicorn
 uvloop
-python-dotenv
+konfik

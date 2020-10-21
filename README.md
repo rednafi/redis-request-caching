@@ -133,16 +133,38 @@ The app uses the following stack:
 
 * You can also go to `http://localhost:5000/docs` and play around with the swagger UI.
 
-    ![alt](./ext/swagger.png)
+
+    ![alt](https://user-images.githubusercontent.com/30027932/96722413-2d0e4500-13cf-11eb-852b-ec53f85585c1.png)
 
 
-* The cached data can be monitored using redisinsight. Go to `http://localhost:8000`.
 
-    ![alt](./ext/redisinsight.png)
+* The cached data can be monitored using redisinsight. Go to `http://localhost:8001`.
+
+    Select the `ADD REDIS DATABASE` button and click `add database`.
+
+    ![alt](https://user-images.githubusercontent.com/30027932/96720922-3bf3f800-13cd-11eb-82dc-b35dc9fc93bf.png)
+
+    This should bring up a prompt like this:
+
+
+    ![alt](https://user-images.githubusercontent.com/30027932/96721353-d3f1e180-13cd-11eb-9510-2baac21e6132.png)
+
+    Give your database a name and provide the localhost IP adress in the form. Keep the username field black and use `ubuntu` as the password.
+
+    Once you've done that you'll be taken to a page like the following:
+
+
+    ![alt](https://user-images.githubusercontent.com/30027932/96721819-7ad67d80-13ce-11eb-9511-c1fa85ed129a.png)
+
+    Select `Browser` button in the top left panel and there you'll be able to look at your cached responses.
+
+    ![alt](https://user-images.githubusercontent.com/30027932/96722038-c0934600-13ce-11eb-9a38-fb489c13f0fc.png)
+
+
 
 ## Remarks
 
-All the pieces of codes in the blog were written and tested with python 3.8 on a machine running Ubuntu 18.04.
+All the pieces of codes in the blog were written and tested with python 3.8 on a machine running Ubuntu 20.04.
 
 ## Disclaimer
 
