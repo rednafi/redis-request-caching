@@ -13,14 +13,14 @@ h11==0.11.0               # via httpcore, uvicorn
 httpcore==0.12.0          # via httpx
 httpx==0.16.1             # via -r requirements.in
 idna==2.10                # via rfc3986
-konfik==1.0.4             # via -r requirements.in
+konfik==2.0.0             # via -r requirements.in
 pydantic==1.6.1           # via fastapi
-pygments==2.7.1           # via rich
+pygments==2.7.2           # via rich
 python-dotenv==0.14.0     # via konfik
 pyyaml==5.3.1             # via konfik
 redis==3.5.3              # via -r requirements.in
 rfc3986[idna2008]==1.4.0  # via httpx
-rich==8.0.0               # via konfik
+rich==9.1.0               # via konfik
 sniffio==1.2.0            # via httpcore, httpx
 starlette==0.13.6         # via fastapi
 toml==0.10.1              # via konfik
