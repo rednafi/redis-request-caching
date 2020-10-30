@@ -1,6 +1,0 @@
-fastapi
-httpx
-redis
-uvicorn
-uvloop
-konfik
