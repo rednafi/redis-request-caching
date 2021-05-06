@@ -8,34 +8,31 @@ services:
       - REDIS_PASSWORD=ubuntu
       - REDIS_REPLICATION_MODE=master
 
-    ports:
-      - 6379:6379
-
     volumes:
-      # save redisearch data to your current working directory
+      # Save redisearch data to your current working directory.
       - ./redis-data:/data
 
     command:
-      # Save if 1 keys are added in every 900 seconds
+      # Save if 1 keys are added in every 900 seconds.
       - --save 900 1
+      - --port 6380
 
-      # Set password
+      # Set password.
       - --requirepass ubuntu
+    network_mode: host
 
-    networks:
-      - redis-net
 
-  redisinsight: # redis db visualization dashboard
+  redisinsight: # Redis db visualization dashboard.
     container_name: redis-insight
     image: redislabs/redisinsight
     ports:
       - 8001:8001
     volumes:
       - redisinsight:/db
-    networks:
-      - redis-net
+    network_mode: host
 
-  web: # Traveling Salesman Optimization api
+
+  web: # Traveling Salesman Optimization api.
     container_name: web-cont
     build:
       context: ./
@@ -44,12 +41,11 @@ services:
       - 5000:5000
     depends_on:
       - redis
-    networks:
-      - redis-net
+    env_file:
+      - .env
+    network_mode: host
 
-networks:
-  redis-net:
-
+    
 volumes:
   redis-data:
   redisinsight:

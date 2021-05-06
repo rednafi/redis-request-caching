@@ -1,0 +1,6 @@
+aioredis==2.0.0a1
+fastapi
+uvloop
+konfik
+uvicorn
+httpx

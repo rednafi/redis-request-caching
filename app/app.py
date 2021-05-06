@@ -1,41 +1,21 @@
 import json
-import sys
 from datetime import timedelta
-from typing import Optional
+from typing import Any
 
+import aioredis
 import httpx
-import redis
 from fastapi import FastAPI
 from konfik import Konfik
 
 konfik = Konfik(".env")
 config = konfik.config
+redis = aioredis.from_url(config.REDIS_DSN, encoding="utf-8", decode_responses=True)
 
 
-def redis_connect() -> Optional[redis.Redis]:
-    try:
-        client = redis.Redis(
-            host=config.HOST,
-            port=int(config.REDIS_PORT),
-            password=config.REDIS_PASSWORD,
-            db=0,
-            socket_timeout=5,
-        )
-        ping = client.ping()
-        if ping is True:
-            return client
-    except redis.AuthenticationError:
-        print("AuthenticationError")
-        sys.exit(1)
-
-
-client = redis_connect()
-
-
-def get_routes_from_api(coordinates: str) -> dict:
+async def get_routes_from_api(coordinates: str) -> dict:
     """Data from mapbox api."""
 
-    with httpx.Client() as client:
+    async with httpx.AsyncClient() as client:
         base_url = "https://api.mapbox.com/optimized-trips/v1/mapbox/driving"
 
         geometries = "geojson"
@@ -43,51 +23,53 @@ def get_routes_from_api(coordinates: str) -> dict:
 
         url = f"{base_url}/{coordinates}?geometries={geometries}&access_token={access_token}"
 
-        response = client.get(url)
+        response = await client.get(url)
         return response.json()
 
 
-def get_routes_from_cache(key: str) -> str:
+async def get_routes_from_cache(redis: aioredis.client.Redis, key: str) -> str:
     """Data from redis."""
 
-    val = client.get(key)
+    val = await redis.get(key)
     return val
 
 
-def set_routes_to_cache(key: str, value: str) -> bool:
+async def set_routes_to_cache(
+    redis: aioredis.client.Redis, key: str, value: str
+) -> bool:
     """Data to redis."""
 
-    state = client.setex(
+    state = await redis.setex(
         key,
-        timedelta(seconds=3600),
+        timedelta(seconds=int(config.CACHE_EXPIRE)),
         value=value,
     )
     return state
 
 
-def route_optima(coordinates: str) -> dict:
+async def route_optima(coordinates: str) -> dict:
 
-    # First it looks for the data in redis cache
-    data = get_routes_from_cache(key=coordinates)
+    # First it looks for the data in redis cache.
+    val = await get_routes_from_cache(redis, key=coordinates)
 
-    # If cache is found then serves the data from cache
-    if data is not None:
-        data = json.loads(data)
+    # If cache is found then serves the data from cache.
+    if val is not None:
+        data = json.loads(val)
         data["cache"] = True
         return data
 
     else:
-        # If cache is not found then sends request to the MapBox API
-        data = get_routes_from_api(coordinates)
+        # If cache is not found then sends request to the MapBox API.
+        data = await get_routes_from_api(coordinates)
 
-        # This block sets saves the respose to redis and serves it directly
+        # This block sets saves the respose to redis and serves it directly.
         if data.get("code") == "Ok":
             data["cache"] = False
             data = json.dumps(data)
-            state = set_routes_to_cache(key=coordinates, value=data)
+            state = await set_routes_to_cache(redis, key=coordinates, value=data)
 
             if state is True:
-                return json.loads(data)
+                return data
         return data
 
 
@@ -95,11 +77,11 @@ app = FastAPI()
 
 
 @app.get("/route-optima/{coordinates}")
-def view(coordinates: str) -> dict:
+async def view(coordinates: str) -> dict[str, Any]:
     """This will wrap our original route optimization API and
     incorporate Redis Caching. You'll only expose this API to
     the end user."""
 
     # coordinates = "90.3866,23.7182;90.3742,23.7461"
 
-    return route_optima(coordinates)
+    return await route_optima(coordinates)

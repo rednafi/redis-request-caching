@@ -18,12 +18,4 @@ install: venvcheck  ## Install the dependencies
 lint: venvcheck		## Run Black and Isort linters
 	@black .
 	@isort .
-
-upgrade: venvcheck	## Upgrade the dependencies
-	@poetry update
-	@poetry export -f requirements.txt -o requirements.txt
-
-downgrade: venvcheck ## Downgrade the dependencies
-	@git checkout pyproject.toml
-	@git checkout poetry.lock
-	@git checkout requirements.txt
+	@mypy .

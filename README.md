@@ -164,12 +164,9 @@ The app uses the following stack:
 
 ## Remarks
 
-All the pieces of codes in the blog were written and tested with python 3.8 on a machine running Ubuntu 20.04.
+All the pieces of codes in the blog were written and tested with python 3.9 on a machine running Ubuntu 20.04.
 
 ## Disclaimer
 
 This app has been made for demonstration purpose only. So it might not reflect the best practices of production ready applications. Using APIs without authentication like this is not recommended.
 
-## To Do
-
-* Add Oauth2 based authentication
