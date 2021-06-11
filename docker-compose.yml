@@ -22,14 +22,14 @@ services:
     network_mode: host
 
 
-  redisinsight: # Redis db visualization dashboard.
-    container_name: redis-insight
-    image: redislabs/redisinsight
-    ports:
-      - 8001:8001
-    volumes:
-      - redisinsight:/db
-    network_mode: host
+  # redisinsight: # Redis db visualization dashboard.
+  #   container_name: redis-insight
+  #   image: redislabs/redisinsight
+  #   ports:
+  #     - 8001:8001
+  #   volumes:
+  #     - redisinsight:/db
+  #   network_mode: host
 
 
   web: # Traveling Salesman Optimization api.
@@ -45,7 +45,7 @@ services:
       - .env
     network_mode: host
 
-    
+
 volumes:
   redis-data:
   redisinsight:
