@@ -12,7 +12,7 @@ asgiref==3.3.4
     # via uvicorn
 async-timeout==3.0.1
     # via aioredis
-certifi==2021.5.30
+certifi==2022.12.7
     # via
     #   httpcore
     #   httpx
